@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "title": "DEX Code Quality Report",
+    "subtitle": "Quality posture across all active DEX engineering projects",
+    "source": "Confluence — Quality Report (Initial)",
+    "sourceUrl": "https://afa-cdi.atlassian.net/wiki/spaces/CDIT/pages/1780318221/Quality+Report+Initial",
+    "space": "CDIT — Dex Technologies",
+    "author": "Isaac Koh",
+    "lastModified": "2026-05-05"
+  },
+  "legend": {
+    "pass": "In place",
+    "fail": "Not in place / missing",
+    "na": "Not applicable"
+  },
+  "dimensions": [
+    { "key": "unitTests", "label": "Unit Tests" },
+    { "key": "sonarQube", "label": "SonarQube Cloud" },
+    { "key": "e2e", "label": "E2E Testing" }
+  ],
+  "projects": [
+    {
+      "name": "Pitstop Core",
+      "group": "Pitstop",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "Pitstop UI",
+      "group": "Pitstop",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "Admin Core",
+      "group": "Admin",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "Admin UI",
+      "group": "Admin",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "DEX-monorepo",
+      "group": "Core",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "Infra-Terragrunt",
+      "group": "Infrastructure",
+      "unitTests": { "status": "na", "note": "No testing" },
+      "sonarQube": { "status": "na", "note": "" },
+      "e2e": { "status": "na", "note": "" },
+      "coverage": "",
+      "prReviewers": null,
+      "prRules": [],
+      "additional": ["Infrastructure code where we spin up the instances for the AWS services."]
+    },
+    {
+      "name": "TrustVC SDK",
+      "group": "TrustVC",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["SonarCloud quality gate pass", "All unit tests must pass", "All E2E tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "TrustVC Website",
+      "group": "TrustVC",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "fail", "note": "" },
+      "e2e": { "status": "fail", "note": "Will be added when website is developed" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All E2E tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "Token Registry",
+      "group": "TrustVC",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "fail", "note": "" },
+      "e2e": { "status": "fail", "note": "No need E2E." },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "TradeTrust Website",
+      "group": "TradeTrust",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "fail", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All E2E tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "OpenCerts Website",
+      "group": "OpenCerts",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "fail", "note": "" },
+      "e2e": { "status": "pass", "note": "" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "Tradex FE",
+      "group": "Tradex",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "fail", "note": "Cypress coming soon" },
+      "coverage": "80%",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
+      "additional": ["Dedicated QA per feature squad"]
+    },
+    {
+      "name": "Tradex BE",
+      "group": "Tradex",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "Uses Hurl Scripts" },
+      "coverage": "80%",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
+      "additional": ["Dedicated QA per feature squad"]
+    },
+    {
+      "name": "Buildex FE",
+      "group": "Buildex",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "fail", "note": "Cypress coming soon" },
+      "coverage": "80%",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
+      "additional": ["Dedicated QA per feature squad"]
+    },
+    {
+      "name": "Buildex BE",
+      "group": "Buildex",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "" },
+      "e2e": { "status": "pass", "note": "Uses Hurl Scripts" },
+      "coverage": "80%",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
+      "additional": ["Dedicated QA per feature squad"]
+    },
+    {
+      "name": "IR FE",
+      "group": "IR",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "using default setting" },
+      "e2e": { "status": "fail", "note": "Cypress coming soon" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass"],
+      "additional": ["Used to have rotational QA but now paused due to team size (1 guy)"]
+    },
+    {
+      "name": "IR BE",
+      "group": "IR",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "using default setting" },
+      "e2e": { "status": "pass", "note": "Uses Hurl Scripts" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass"],
+      "additional": ["Used to have rotational QA but now paused due to team size (1 guy)"]
+    },
+    {
+      "name": "SMP FE",
+      "group": "SMP",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "using default setting" },
+      "e2e": { "status": "fail", "note": "Cypress coming soon" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)"]
+    },
+    {
+      "name": "SMP BE",
+      "group": "SMP",
+      "unitTests": { "status": "pass", "note": "" },
+      "sonarQube": { "status": "pass", "note": "using default setting" },
+      "e2e": { "status": "pass", "note": "Uses Hurl Scripts" },
+      "coverage": "",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)", "Have load testing"]
+    },
+    {
+      "name": "CTOaaS",
+      "group": "CTOaaS",
+      "unitTests": { "status": "pass", "note": "Includes integration tests. Tests for agents" },
+      "sonarQube": { "status": "fail", "note": "" },
+      "e2e": { "status": "pass", "note": "For whole conversation" },
+      "coverage": "Includes integration tests. Tests for agents",
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": []
+    }
+  ],
+  "sonarQube": {
+    "qualityGate": [
+      { "area": "Security", "setting": "New Vulnerabilities = 0" },
+      { "area": "Hotspots", "setting": "100% reviewed" },
+      { "area": "Coverage", "setting": "New Code ≥ 80%" },
+      { "area": "Code Smells", "setting": "New = 0" },
+      { "area": "Debt Ratio", "setting": "New ≤ 5%" },
+      { "area": "Duplication", "setting": "New ≤ 3%" }
+    ],
+    "recommendedRatings": [
+      { "metric": "Security", "value": "A" },
+      { "metric": "Reliability", "value": "A" },
+      { "metric": "Maintainability", "value": "A" },
+      { "metric": "Test Coverage", "value": "" },
+      { "metric": "Security Hotspots", "value": "0" },
+      { "metric": "Duplications", "value": "" }
+    ],
+    "cadence": "Monthly review for SonarQube ratings."
+  },
+  "plan": [
+    {
+      "phase": "Phase 1",
+      "items": [
+        "Set up and align all projects to require SonarQube with the recommended settings.",
+        "SonarQube to be required in all CI/CD pipelines.",
+        "Monthly review for SonarQube ratings.",
+        "TrustVC to trial an AI E2E writing tool (shortest.com / Claude / Windsurf).",
+        "Work with each team on the best QA solution — rotation (1 QA per story) or a dedicated QA Engineer — recognising some teams face QA staffing constraints."
+      ],
+      "openQuestion": "Is there a budget for quality control tools?"
+    },
+    {
+      "phase": "Phase 2",
+      "items": [
+        "Enable E2E for FE repos using Cypress.",
+        "Enable E2E for BE repos using Hurl scripts (to evolve per project as teams adopt familiar tooling).",
+        "Testing must pass on pre-prod or lower (dev) env before moving to prod — CI/CD pipeline to enforce this.",
+        "Roll out AI E2E tool to other projects."
+      ],
+      "openQuestion": ""
+    },
+    {
+      "phase": "Phase 3",
+      "items": [
+        "Maintain quality of code and QA process.",
+        "Continuously trial new tools that help testing in each project, and align them across all DEX projects."
+      ],
+      "openQuestion": ""
+    }
+  ],
+  "openQuestions": [
+    "Should we have QA?",
+    "Look at the tools that can increase code quality — is meticulous.ai the right tool?",
+    "Build a holistic picture for testing.",
+    "Best combination in terms of processes, tools and roles/resources."
+  ]
+}
