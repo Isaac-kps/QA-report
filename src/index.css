@@ -97,8 +97,18 @@ body {
 .sticky-col { position: sticky; left: 0; background: var(--surface); z-index: 1; }
 .matrix th.sticky-col { background: var(--surface-2); }
 .matrix tr:hover .sticky-col { background: #fafbff; }
-.proj-name { font-weight: 600; color: var(--text); }
-.proj-group { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+.proj-name { font-weight: 600; color: var(--text); padding-left: 0.5rem; }
+
+/* Group header rows */
+.group-row td { background: #eef2ff; border-bottom: 1px solid #c7d2fe; }
+.group-row:hover td { background: #eef2ff; }
+.group-cell {
+  font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--brand-dark); padding: 0.55rem 0.85rem;
+}
+.matrix tr.group-row:hover .sticky-col { background: #eef2ff; }
+.group-row .sticky-col { background: #eef2ff; }
+.group-count { font-size: 0.72rem; font-weight: 600; color: var(--brand); text-transform: none; letter-spacing: 0; }
 .center { text-align: center; }
 .muted { color: var(--muted); }
 

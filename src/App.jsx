@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import report from './data/quality-report.json'
 
 const STATUS_META = {
@@ -48,6 +48,19 @@ export default function App() {
       return matchesGroup && matchesQuery
     })
   }, [projects, query, groupFilter])
+
+  const grouped = useMemo(() => {
+    const order = []
+    const byGroup = new Map()
+    filtered.forEach((p) => {
+      if (!byGroup.has(p.group)) {
+        byGroup.set(p.group, [])
+        order.push(p.group)
+      }
+      byGroup.get(p.group).push(p)
+    })
+    return order.map((group) => ({ group, items: byGroup.get(group) }))
+  }, [filtered])
 
   const stats = useMemo(() => {
     const counted = projects.filter((p) => p.unitTests.status !== 'na')
@@ -118,34 +131,43 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((p) => (
-                  <tr key={p.name}>
-                    <td className="sticky-col">
-                      <div className="proj-name">{p.name}</div>
-                      <div className="proj-group">{p.group}</div>
-                    </td>
-                    {dimensions.map((d) => (
-                      <td key={d.key}>
-                        <StatusPill status={p[d.key].status} note={p[d.key].note} />
+                {grouped.map(({ group, items }) => (
+                  <Fragment key={group}>
+                    <tr className="group-row">
+                      <td className="sticky-col group-cell">{group}</td>
+                      <td className="group-cell" colSpan={dimensions.length + 4}>
+                        <span className="group-count">{items.length} {items.length === 1 ? 'project' : 'projects'}</span>
                       </td>
+                    </tr>
+                    {items.map((p) => (
+                      <tr key={p.name}>
+                        <td className="sticky-col">
+                          <div className="proj-name">{p.name}</div>
+                        </td>
+                        {dimensions.map((d) => (
+                          <td key={d.key}>
+                            <StatusPill status={p[d.key].status} note={p[d.key].note} />
+                          </td>
+                        ))}
+                        <td>{p.coverage || <span className="muted">—</span>}</td>
+                        <td className="center">{p.prReviewers ?? <span className="muted">—</span>}</td>
+                        <td>
+                          {p.prRules.length ? (
+                            <ul className="ruleset">
+                              {p.prRules.map((r, i) => <li key={i}>{r}</li>)}
+                            </ul>
+                          ) : <span className="muted">—</span>}
+                        </td>
+                        <td>
+                          {p.additional.length ? (
+                            <ul className="ruleset subtle">
+                              {p.additional.map((a, i) => <li key={i}>{a}</li>)}
+                            </ul>
+                          ) : <span className="muted">—</span>}
+                        </td>
+                      </tr>
                     ))}
-                    <td>{p.coverage || <span className="muted">—</span>}</td>
-                    <td className="center">{p.prReviewers ?? <span className="muted">—</span>}</td>
-                    <td>
-                      {p.prRules.length ? (
-                        <ul className="ruleset">
-                          {p.prRules.map((r, i) => <li key={i}>{r}</li>)}
-                        </ul>
-                      ) : <span className="muted">—</span>}
-                    </td>
-                    <td>
-                      {p.additional.length ? (
-                        <ul className="ruleset subtle">
-                          {p.additional.map((a, i) => <li key={i}>{a}</li>)}
-                        </ul>
-                      ) : <span className="muted">—</span>}
-                    </td>
-                  </tr>
+                  </Fragment>
                 ))}
               </tbody>
             </table>
