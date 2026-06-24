@@ -1,20 +1,22 @@
-import { Fragment, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import report from './data/quality-report.json'
 
 const STATUS_META = {
   pass: { label: 'In place', symbol: '✓', cls: 'pass' },
   fail: { label: 'Missing', symbol: '✕', cls: 'fail' },
-  na: { label: 'N/A', symbol: '–', cls: 'na' },
+  na: { label: 'Not applicable', symbol: '–', cls: 'na' },
 }
 
-function StatusPill({ status, note }) {
+function CheckBadge({ status, label, note }) {
   const meta = STATUS_META[status] || STATUS_META.na
   return (
-    <span className={`pill pill-${meta.cls}`} title={note || meta.label}>
-      <span className="pill-symbol">{meta.symbol}</span>
-      {meta.label}
-      {note ? <span className="pill-note">{note}</span> : null}
-    </span>
+    <div className={`check check-${meta.cls}`} title={`${label}: ${meta.label}${note ? ` — ${note}` : ''}`}>
+      <span className="check-ic">{meta.symbol}</span>
+      <span className="check-meta">
+        <span className="check-label">{label}</span>
+        {note ? <span className="check-note">{note}</span> : null}
+      </span>
+    </div>
   )
 }
 
@@ -102,9 +104,9 @@ export default function App() {
           <StatCard label="E2E testing in place" value={stats.e2e.pass} total={stats.e2e.tracked} tone="warn" />
         </section>
 
-        <section className="panel">
-          <div className="panel-head">
-            <h2>Coverage Matrix</h2>
+        <section className="board">
+          <div className="board-head">
+            <h2>Coverage by Group</h2>
             <div className="controls">
               <input
                 className="search"
@@ -121,61 +123,36 @@ export default function App() {
             </div>
           </div>
 
-          <div className="table-scroll">
-            <table className="matrix">
-              <thead>
-                <tr>
-                  <th className="sticky-col">Project</th>
-                  {dimensions.map((d) => (
-                    <th key={d.key}>{d.label}</th>
-                  ))}
-                  <th>Coverage</th>
-                  <th>PR Reviewers</th>
-                  <th>PR Rules</th>
-                  <th>Additional</th>
-                </tr>
-              </thead>
-              <tbody>
-                {grouped.map(({ group, items }) => (
-                  <Fragment key={group}>
-                    <tr className="group-row">
-                      <td className="sticky-col group-cell">{group}</td>
-                      <td className="group-cell" colSpan={dimensions.length + 4}>
-                        <span className="group-count">{items.length} {items.length === 1 ? 'project' : 'projects'}</span>
-                      </td>
-                    </tr>
-                    {items.map((p) => (
-                      <tr key={p.name}>
-                        <td className="sticky-col">
-                          <div className="proj-name">{p.name}</div>
-                        </td>
+          <div className="groups">
+            {grouped.map(({ group, items }) => (
+              <div className="group" key={group}>
+                <div className="group-head">
+                  <span className="group-bar" />
+                  <h3>{group}</h3>
+                  <span className="group-count">{items.length} {items.length === 1 ? 'project' : 'projects'}</span>
+                </div>
+                <div className="group-projects">
+                  {items.map((p) => (
+                    <div className="pcard" key={p.name}>
+                      <div className="pcard-head">
+                        <span className="pcard-name">{p.name}</span>
+                        {p.coverage ? <span className="cov">Coverage {p.coverage}</span> : null}
+                      </div>
+                      <div className="pchecks">
                         {dimensions.map((d) => (
-                          <td key={d.key}>
-                            <StatusPill status={p[d.key].status} note={p[d.key].note} />
-                          </td>
+                          <CheckBadge
+                            key={d.key}
+                            status={p[d.key].status}
+                            label={d.label}
+                            note={p[d.key].note}
+                          />
                         ))}
-                        <td>{p.coverage || <span className="muted">—</span>}</td>
-                        <td className="center">{p.prReviewers ?? <span className="muted">—</span>}</td>
-                        <td>
-                          {p.prRules.length ? (
-                            <ul className="ruleset">
-                              {p.prRules.map((r, i) => <li key={i}>{r}</li>)}
-                            </ul>
-                          ) : <span className="muted">—</span>}
-                        </td>
-                        <td>
-                          {p.additional.length ? (
-                            <ul className="ruleset subtle">
-                              {p.additional.map((a, i) => <li key={i}>{a}</li>)}
-                            </ul>
-                          ) : <span className="muted">—</span>}
-                        </td>
-                      </tr>
-                    ))}
-                  </Fragment>
-                ))}
-              </tbody>
-            </table>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
           {filtered.length === 0 && <p className="empty">No projects match your filter.</p>}
         </section>
