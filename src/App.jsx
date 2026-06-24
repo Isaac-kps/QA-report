@@ -7,15 +7,19 @@ const STATUS_META = {
   na: { label: 'Not applicable', symbol: '–', cls: 'na' },
 }
 
-function CheckBadge({ status, label, note }) {
+function CheckBadge({ status, label, note, coverage }) {
   const meta = STATUS_META[status] || STATUS_META.na
+  const title = `${label}: ${meta.label}` +
+    (coverage ? ` — coverage ${coverage}` : '') +
+    (note ? ` — ${note}` : '')
   return (
-    <div className={`check check-${meta.cls}`} title={`${label}: ${meta.label}${note ? ` — ${note}` : ''}`}>
+    <div className={`check check-${meta.cls}`} title={title}>
       <span className="check-ic">{meta.symbol}</span>
       <span className="check-meta">
         <span className="check-label">{label}</span>
         {note ? <span className="check-note">{note}</span> : null}
       </span>
+      {coverage ? <span className="check-cov">{coverage}</span> : null}
     </div>
   )
 }
@@ -65,11 +69,11 @@ export default function App() {
   }, [filtered])
 
   const stats = useMemo(() => {
-    const applicable = (key) => projects.filter((p) => p[key].status !== 'na')
+    const applicable = (key) => projects.filter((p) => p.tests[key].status !== 'na')
     const dim = (key) => {
       const tracked = applicable(key)
       return {
-        pass: tracked.filter((p) => p[key].status === 'pass').length,
+        pass: tracked.filter((p) => p.tests[key].status === 'pass').length,
         tracked: tracked.length,
       }
     }
@@ -136,17 +140,20 @@ export default function App() {
                     <div className="pcard" key={p.name}>
                       <div className="pcard-head">
                         <span className="pcard-name">{p.name}</span>
-                        {p.coverage ? <span className="cov">Coverage {p.coverage}</span> : null}
                       </div>
                       <div className="pchecks">
-                        {dimensions.map((d) => (
-                          <CheckBadge
-                            key={d.key}
-                            status={p[d.key].status}
-                            label={d.label}
-                            note={p[d.key].note}
-                          />
-                        ))}
+                        {dimensions.map((d) => {
+                          const c = p.tests[d.key]
+                          return (
+                            <CheckBadge
+                              key={d.key}
+                              status={c.status}
+                              label={d.label}
+                              note={c.note}
+                              coverage={c.coverage}
+                            />
+                          )
+                        })}
                       </div>
                     </div>
                   ))}

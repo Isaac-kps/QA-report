@@ -154,6 +154,10 @@ body {
 .check-meta { min-width: 0; display: flex; flex-direction: column; }
 .check-label { font-size: 0.86rem; font-weight: 700; line-height: 1.2; }
 .check-note { font-size: 0.74rem; color: var(--muted); line-height: 1.25; margin-top: 0.1rem; }
+.check-cov {
+  margin-left: auto; flex-shrink: 0; font-size: 0.7rem; font-weight: 700; color: var(--brand);
+  background: #fff; border: 1px solid #e0e7ff; border-radius: 999px; padding: 0.18rem 0.55rem;
+}
 .check-pass { background: var(--good-bg); border-color: #bbf7d0; }
 .check-pass .check-ic { color: var(--good); border-color: #bbf7d0; }
 .check-pass .check-label { color: #15803d; }
