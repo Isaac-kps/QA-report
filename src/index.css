@@ -53,7 +53,7 @@ body {
 }
 
 /* Stats */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
 .stat-card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
   padding: 1.25rem 1.5rem; box-shadow: var(--shadow);

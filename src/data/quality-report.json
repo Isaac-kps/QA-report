@@ -23,9 +23,9 @@
       "name": "Pitstop Core",
       "group": "Pitstop",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "" }
+        "e2e": { "status": "pass", "note": "using qa playwright" }
       },
       "prReviewers": 1,
       "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
@@ -35,9 +35,9 @@
       "name": "Pitstop UI",
       "group": "Pitstop",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "" }
+        "e2e": { "status": "pass", "note": "using qa playwright" }
       },
       "prReviewers": 1,
       "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
@@ -47,9 +47,9 @@
       "name": "Admin Core",
       "group": "Admin",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "" }
+        "e2e": { "status": "pass", "note": "using qa playwright" }
       },
       "prReviewers": 1,
       "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
@@ -59,9 +59,9 @@
       "name": "Admin UI",
       "group": "Admin",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "" }
+        "e2e": { "status": "pass", "note": "using qa playwright" }
       },
       "prReviewers": 1,
       "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
@@ -71,9 +71,9 @@
       "name": "DEX-monorepo",
       "group": "Core",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "" }
+        "e2e": { "status": "pass", "note": "using qa playwright" }
       },
       "prReviewers": 1,
       "prRules": ["SonarCloud quality gate pass", "All unit tests must pass"],
@@ -95,9 +95,9 @@
       "name": "TrustVC SDK",
       "group": "TrustVC",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "" }
+        "e2e": { "status": "na", "note": "it is tested in FE" }
       },
       "prReviewers": 1,
       "prRules": ["SonarCloud quality gate pass", "All unit tests must pass", "All E2E tests must pass"],
@@ -107,8 +107,8 @@
       "name": "TrustVC Website",
       "group": "TrustVC",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
-        "sonarQube": { "status": "fail", "note": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
+        "sonarQube": { "status": "fail", "note": "adding in soon" },
         "e2e": { "status": "pass", "note": "" }
       },
       "prReviewers": 1,
@@ -119,9 +119,9 @@
       "name": "Token Registry",
       "group": "TradeTrust",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "na", "note": "" },
-        "e2e": { "status": "na", "note": "No need E2E." }
+        "e2e": { "status": "na", "note": "It is tested in the FE" }
       },
       "prReviewers": 1,
       "prRules": ["All unit tests must pass"],
@@ -131,8 +131,8 @@
       "name": "TradeTrust Website",
       "group": "TradeTrust",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
-        "sonarQube": { "status": "fail", "note": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
+        "sonarQube": { "status": "fail", "note": "will be added soon" },
         "e2e": { "status": "pass", "note": "" }
       },
       "prReviewers": 1,
@@ -143,8 +143,8 @@
       "name": "OpenCerts Website",
       "group": "OpenCerts",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
-        "sonarQube": { "status": "fail", "note": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
+        "sonarQube": { "status": "fail", "note": "will be added soon" },
         "e2e": { "status": "pass", "note": "" }
       },
       "prReviewers": 1,
@@ -152,58 +152,10 @@
       "additional": []
     },
     {
-      "name": "Tradex FE",
-      "group": "Tradex",
+      "name": "IR FrontEnd",
+      "group": "Invoice Repository",
       "tests": {
         "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
-        "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "fail", "note": "E2E coming soon" }
-      },
-      "prReviewers": 1,
-      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
-      "additional": ["Dedicated QA per feature squad"]
-    },
-    {
-      "name": "Tradex BE",
-      "group": "Tradex",
-      "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
-        "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "Uses Hurl Scripts" }
-      },
-      "prReviewers": 1,
-      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
-      "additional": ["Dedicated QA per feature squad"]
-    },
-    {
-      "name": "Buildex FE",
-      "group": "Buildex",
-      "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
-        "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "fail", "note": "E2E coming soon" }
-      },
-      "prReviewers": 1,
-      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
-      "additional": ["Dedicated QA per feature squad"]
-    },
-    {
-      "name": "Buildex BE",
-      "group": "Buildex",
-      "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
-        "sonarQube": { "status": "pass", "note": "" },
-        "e2e": { "status": "pass", "note": "Uses Hurl Scripts" }
-      },
-      "prReviewers": 1,
-      "prRules": ["All unit tests must pass", "Screenshot of bug fixes or features for PRs"],
-      "additional": ["Dedicated QA per feature squad"]
-    },
-    {
-      "name": "IR FE",
-      "group": "IR",
-      "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
         "sonarQube": { "status": "pass", "note": "using default setting" },
         "e2e": { "status": "fail", "note": "Cypress coming soon" }
       },
@@ -212,10 +164,10 @@
       "additional": ["Used to have rotational QA but now paused due to team size (1 guy)"]
     },
     {
-      "name": "IR BE",
-      "group": "IR",
+      "name": "IR BackEend",
+      "group": "Invoice Repository",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "using default setting" },
         "e2e": { "status": "pass", "note": "Uses Hurl Scripts" }
       },
@@ -224,10 +176,10 @@
       "additional": ["Used to have rotational QA but now paused due to team size (1 guy)"]
     },
     {
-      "name": "SMP FE",
+      "name": "SMP FrontEnd",
       "group": "SMP",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "using default setting" },
         "e2e": { "status": "fail", "note": "Cypress coming soon" }
       },
@@ -236,12 +188,36 @@
       "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)"]
     },
     {
-      "name": "SMP BE",
+      "name": "SMP BackEnd",
       "group": "SMP",
       "tests": {
-        "unitTests": { "status": "pass", "note": "", "coverage": "" },
+        "unitTests": { "status": "pass", "note": "", "coverage": "80%" },
         "sonarQube": { "status": "pass", "note": "using default setting" },
         "e2e": { "status": "pass", "note": "Uses Hurl Scripts" }
+      },
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)", "Have load testing"]
+    },
+    {
+      "name": "SML FrontEnd",
+      "group": "SML",
+      "tests": {
+        "unitTests": { "status": "fail", "note": "still in POC", "coverage": "" },
+        "sonarQube": { "status": "fail", "note": "still in POC" },
+        "e2e": { "status": "fail", "note": "still in POC" }
+      },
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)", "Have load testing"]
+    },
+    {
+      "name": "SML BackEnd",
+      "group": "SML",
+      "tests": {
+        "unitTests": { "status": "fail", "note": "still in POC", "coverage": "" },
+        "sonarQube": { "status": "fail", "note": "still in POC" },
+        "e2e": { "status": "fail", "note": "still in POC" }
       },
       "prReviewers": 1,
       "prRules": ["All unit tests must pass", "All integration tests must pass"],
@@ -251,9 +227,23 @@
       "name": "CTOaaS",
       "group": "CTOaaS",
       "tests": {
-        "unitTests": { "status": "pass", "note": "Includes integration tests. Tests for agents", "coverage": "" },
-        "sonarQube": { "status": "fail", "note": "" },
-        "e2e": { "status": "pass", "note": "For whole conversation" }
+        "evalUnitTests": { "status": "pass", "note": "Includes integration tests. Tests for agents", "coverage": "80%" },
+        "sonarQube": { "status": "na", "note": "" },
+        "evalE2ETest": { "status": "pass", "note": "For whole conversation" }
+      },
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": []
+    },
+    {
+      "name": "FarmApp",
+      "group": "FarmDex",
+      "tests": {
+        "unitTests": { "status": "na", "note": "not enforced", "coverage": "" },
+        "sqlTests": {"status": "pass", "note": "backend API test" },
+        "sonarQube": { "status": "na", "note": "" },
+        "e2e": { "status": "pass", "note": "For frontend" },
+        "androidE2E": { "status": "fail", "note": "in progress" }
       },
       "prReviewers": 1,
       "prRules": ["All unit tests must pass", "All integration tests must pass"],

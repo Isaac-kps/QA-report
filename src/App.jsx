@@ -7,6 +7,28 @@ const STATUS_META = {
   na: { label: 'Not applicable', symbol: '–', cls: 'na' },
 }
 
+// Friendly labels for known test keys; unknown keys are auto-humanized.
+const LABELS = {
+  unitTests: 'Unit Tests',
+  sonarQube: 'SonarQube Cloud',
+  e2e: 'E2E Testing',
+  evalUnitTests: 'Eval Unit Tests',
+  evalE2ETest: 'Eval E2E Test',
+  sqlTests: 'SQL Tests',
+  androidE2E: 'Android E2E',
+}
+
+function humanize(key) {
+  return key
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/^./, (c) => c.toUpperCase())
+    .replace(/\bE2 E\b/, 'E2E')
+    .replace(/\bSql\b/, 'SQL')
+    .replace(/\bUi\b/, 'UI')
+}
+
+const labelFor = (key) => LABELS[key] || humanize(key)
+
 function CheckBadge({ status, label, note, coverage }) {
   const meta = STATUS_META[status] || STATUS_META.na
   const hasCoverage = coverage !== undefined
@@ -40,7 +62,7 @@ function StatCard({ label, value, total, tone }) {
 }
 
 export default function App() {
-  const { meta, dimensions, projects, sonarQube, plan, openQuestions } = report
+  const { meta, projects, sonarQube, plan } = report
   const [query, setQuery] = useState('')
   const [groupFilter, setGroupFilter] = useState('All')
 
@@ -72,20 +94,17 @@ export default function App() {
   }, [filtered])
 
   const stats = useMemo(() => {
-    const applicable = (key) => projects.filter((p) => p.tests[key].status !== 'na')
-    const dim = (key) => {
-      const tracked = applicable(key)
-      return {
-        pass: tracked.filter((p) => p.tests[key].status === 'pass').length,
-        tracked: tracked.length,
-      }
-    }
-    return {
-      total: projects.length,
-      unit: dim('unitTests'),
-      sonar: dim('sonarQube'),
-      e2e: dim('e2e'),
-    }
+    let passing = 0
+    let applicable = 0
+    let fullyGreen = 0
+    projects.forEach((p) => {
+      const checks = Object.values(p.tests).filter((c) => c.status !== 'na')
+      const passed = checks.filter((c) => c.status === 'pass')
+      passing += passed.length
+      applicable += checks.length
+      if (checks.length > 0 && passed.length === checks.length) fullyGreen += 1
+    })
+    return { total: projects.length, passing, applicable, fullyGreen }
   }, [projects])
 
   return (
@@ -106,9 +125,8 @@ export default function App() {
       <main className="container">
         <section className="stats">
           <StatCard label="Projects tracked" value={stats.total} tone="neutral" />
-          <StatCard label="Unit tests in place" value={stats.unit.pass} total={stats.unit.tracked} tone="good" />
-          <StatCard label="SonarQube enabled" value={stats.sonar.pass} total={stats.sonar.tracked} tone="warn" />
-          <StatCard label="E2E testing in place" value={stats.e2e.pass} total={stats.e2e.tracked} tone="warn" />
+          <StatCard label="Checks passing" value={stats.passing} total={stats.applicable} tone="good" />
+          <StatCard label="Projects fully green" value={stats.fullyGreen} total={stats.total} tone="warn" />
         </section>
 
         <section className="board">
@@ -145,18 +163,15 @@ export default function App() {
                         <span className="pcard-name">{p.name}</span>
                       </div>
                       <div className="pchecks">
-                        {dimensions.map((d) => {
-                          const c = p.tests[d.key]
-                          return (
-                            <CheckBadge
-                              key={d.key}
-                              status={c.status}
-                              label={d.label}
-                              note={c.note}
-                              coverage={c.coverage}
-                            />
-                          )
-                        })}
+                        {Object.entries(p.tests).map(([key, c]) => (
+                          <CheckBadge
+                            key={key}
+                            status={c.status}
+                            label={labelFor(key)}
+                            note={c.note}
+                            coverage={c.coverage}
+                          />
+                        ))}
                       </div>
                     </div>
                   ))}
@@ -167,6 +182,7 @@ export default function App() {
           {filtered.length === 0 && <p className="empty">No projects match your filter.</p>}
         </section>
 
+        {/* Temporarily hidden — SonarQube Quality Gate, Recommended Ratings, and Proposed Plan
         <section className="two-col">
           <div className="panel">
             <div className="panel-head"><h2>SonarQube Quality Gate</h2></div>
@@ -221,18 +237,9 @@ export default function App() {
             ))}
           </div>
         </section>
+        */}
 
-        <section className="panel">
-          <div className="panel-head"><h2>Open Questions</h2></div>
-          <ul className="questions">
-            {openQuestions.map((q, i) => <li key={i}>{q}</li>)}
-          </ul>
-        </section>
       </main>
-
-      <footer className="footer">
-        <span>Generated from “{meta.source}”. Edit <code>src/data/quality-report.json</code> to update.</span>
-      </footer>
     </div>
   )
 }
