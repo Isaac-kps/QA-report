@@ -9,8 +9,9 @@ const STATUS_META = {
 
 function CheckBadge({ status, label, note, coverage }) {
   const meta = STATUS_META[status] || STATUS_META.na
+  const hasCoverage = coverage !== undefined
   const title = `${label}: ${meta.label}` +
-    (coverage ? ` — coverage ${coverage}` : '') +
+    (hasCoverage ? ` — code coverage: ${coverage || '-'}` : '') +
     (note ? ` — ${note}` : '')
   return (
     <div className={`check check-${meta.cls}`} title={title}>
@@ -18,8 +19,10 @@ function CheckBadge({ status, label, note, coverage }) {
       <span className="check-meta">
         <span className="check-label">{label}</span>
         {note ? <span className="check-note">{note}</span> : null}
+        {hasCoverage ? (
+          <span className="check-cov">Code coverage: <strong>{coverage || '-'}</strong></span>
+        ) : null}
       </span>
-      {coverage ? <span className="check-cov">{coverage}</span> : null}
     </div>
   )
 }
