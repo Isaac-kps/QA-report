@@ -223,6 +223,18 @@
       "prRules": ["All unit tests must pass", "All integration tests must pass"],
       "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)", "Have load testing"]
     },
+     {
+      "name": "AP",
+      "group": "AP",
+      "tests": {
+        "unitTests": { "status": "fail", "note": "still in POC", "coverage": "" },
+        "sonarQube": { "status": "fail", "note": "still in POC" },
+        "e2e": { "status": "fail", "note": "still in POC" }
+      },
+      "prReviewers": 1,
+      "prRules": ["All unit tests must pass", "All integration tests must pass"],
+      "additional": ["Have integration test as safety net", "Have dedicated QA (Mansab)", "Have load testing"]
+    },
     {
       "name": "CTOaaS",
       "group": "CTOaaS",
