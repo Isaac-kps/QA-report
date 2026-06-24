@@ -63,6 +63,11 @@ function StatCard({ label, value, total, tone }) {
 
 export default function App() {
   const { meta, projects, sonarQube, plan } = report
+  // Injected at build time from the repo's latest commit (see vite.config.js);
+  // falls back to the JSON value when unavailable (e.g. no git context).
+  const lastModified = __LAST_MODIFIED__
+    ? new Date(__LAST_MODIFIED__).toISOString().slice(0, 10)
+    : meta.lastModified
   const [query, setQuery] = useState('')
   const [groupFilter, setGroupFilter] = useState('All')
 
@@ -116,7 +121,7 @@ export default function App() {
           <p className="subtitle">{meta.subtitle}</p>
           <div className="hero-meta">
             <span>Author: {meta.author}</span>
-            <span>Last modified: {meta.lastModified}</span>
+            <span>Last modified: {lastModified}</span>
             <a href={meta.sourceUrl} target="_blank" rel="noreferrer">Source ↗</a>
           </div>
         </div>
@@ -126,7 +131,6 @@ export default function App() {
         <section className="stats">
           <StatCard label="Projects tracked" value={stats.total} tone="neutral" />
           <StatCard label="Checks passing" value={stats.passing} total={stats.applicable} tone="good" />
-          <StatCard label="Projects fully green" value={stats.fullyGreen} total={stats.total} tone="warn" />
         </section>
 
         <section className="board">
