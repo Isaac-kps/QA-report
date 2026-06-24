@@ -63,14 +63,19 @@ export default function App() {
   }, [filtered])
 
   const stats = useMemo(() => {
-    const counted = projects.filter((p) => p.unitTests.status !== 'na')
-    const tally = (key) => counted.filter((p) => p[key].status === 'pass').length
+    const applicable = (key) => projects.filter((p) => p[key].status !== 'na')
+    const dim = (key) => {
+      const tracked = applicable(key)
+      return {
+        pass: tracked.filter((p) => p[key].status === 'pass').length,
+        tracked: tracked.length,
+      }
+    }
     return {
       total: projects.length,
-      tracked: counted.length,
-      unit: tally('unitTests'),
-      sonar: tally('sonarQube'),
-      e2e: tally('e2e'),
+      unit: dim('unitTests'),
+      sonar: dim('sonarQube'),
+      e2e: dim('e2e'),
     }
   }, [projects])
 
@@ -92,9 +97,9 @@ export default function App() {
       <main className="container">
         <section className="stats">
           <StatCard label="Projects tracked" value={stats.total} tone="neutral" />
-          <StatCard label="Unit tests in place" value={stats.unit} total={stats.tracked} tone="good" />
-          <StatCard label="SonarQube enabled" value={stats.sonar} total={stats.tracked} tone="warn" />
-          <StatCard label="E2E testing in place" value={stats.e2e} total={stats.tracked} tone="warn" />
+          <StatCard label="Unit tests in place" value={stats.unit.pass} total={stats.unit.tracked} tone="good" />
+          <StatCard label="SonarQube enabled" value={stats.sonar.pass} total={stats.sonar.tracked} tone="warn" />
+          <StatCard label="E2E testing in place" value={stats.e2e.pass} total={stats.e2e.tracked} tone="warn" />
         </section>
 
         <section className="panel">
